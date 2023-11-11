@@ -1,0 +1,14 @@
+# simoy function
+    σ(x) = 1 / (1 + e⁻ˣ)
+# probability 
+     y(y = 1| x) = 1 / (1 + e⁻ᵝᵀˣ)  = σ(βᵀX)
+
+# loss function  
+    f = Σᵢᵐ(Yᵢ - Yᵢ_predict)²
+
+# loss function - cross entropy
+    f = -1 / m * Σᵢᵐ ( yᵢ * log(P(y = 1 | xᵢ)) +  (1 - yᵢ) * log(p(y=1 | xᵢ))) 
+
+# gradient decent using cross entropy
+    #  αfᵢ/αβ = Σⱼ (Yᵢ - Pᵢ) * Xⱼ  . i is row and j is column. 
+
