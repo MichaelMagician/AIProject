@@ -1,5 +1,6 @@
 # sigmoid function
     σ(x) = 1 / (1 + e⁻ˣ)
+    
 # probability 
      y(y = 1| x) = 1 / (1 + e⁻ᵝᵀˣ)  = σ(βᵀX)
 
