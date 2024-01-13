@@ -65,7 +65,7 @@ def print_model_info(env, state, action):
             '\tTransitioning to %s state %d with probability %f and reward %f'
             % (state_type, nextstate, prob, reward))
         
-def run_optimal_policy(env, opp, gamma=0.9):
+def run_optimal_policy(env, policy, gamma=0.9):
     """Run an optimal policy for the given environment.
 
     Logs the total reward and the number of steps until the terminal
@@ -76,7 +76,7 @@ def run_optimal_policy(env, opp, gamma=0.9):
     env: gym.envs.Environment
       Instance of an OpenAI gym.
 
-    opp: np.ndarray
+    policy: np.ndarray
       Optimal Policy
 
     Returns
@@ -95,7 +95,7 @@ def run_optimal_policy(env, opp, gamma=0.9):
     s = initial_state[0]
 
     while True:
-        next_act = opp[s]
+        next_act = policy[s]
         nextstate, reward, is_terminal, debug_info, prob = env.step(next_act)
         env.render()
 
@@ -104,7 +104,7 @@ def run_optimal_policy(env, opp, gamma=0.9):
 
         if is_terminal:
             break
-        
+
         s = nextstate
 
     return total_reward, num_steps
@@ -156,21 +156,21 @@ def compare_performance(env, gamma=0.9):
     print("Value Iternation:%d" % iteration_cnt)
     policy, value_func, improve_iteration, evalue_iteration = policy_iteration(env, gamma=gamma)
     print("Policy iteration:%d" % improve_iteration)
-# def main():
-    # create the environment
-    # env = gym.make('FrozenLake-v0')
 
 if __name__ == '__main__':
     # env = gym.make("LunarLander-v2", render_mode="human")
     # env = gym.make('Deterministic-4x4-FrozenLake-v0')
-    env = gym.make('FrozenLake-v1', desc=None, map_name="4x4", is_slippery=False, render_mode="human")
-
+    env = gym.make('FrozenLake-v1', desc=None, map_name="8x8", is_slippery=True, render_mode="human")
+    
     print(env)
     # print_env_info(env)
     print_model_info(env, 0, DOWN)
     print_model_info(env, 1, DOWN)
     print_model_info(env, 14, RIGHT)
 
-    total_reward, num_steps = cal_value_iteration(env)
+    total_reward, num_steps = cal_policy_iteration(env)
     print('Agent received total reward of: %f' % total_reward)
     print('Agent took %d steps' % num_steps)
+
+    # compare_performance(env)
+    
